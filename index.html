@@ -9,44 +9,12 @@
     <nav>
         <a href="/" onclick="route()">Home</a>
         <a href="/about" onclick="route()">Sobre</a>
-        <a href="/contato" onclick="route()">contact</a>
+        <a href="/contact" onclick="route()">contact</a>
         <a href="/404" onclick="route()">404</a>
     </nav>
 
     <div id="app"></div>
 
-    <script>
-
-        const routes = {
-            "/": "/pages/home.html",
-            "/about": "/pages/home.html",
-            "/contato": "/pages/home.html",
-            404: "/pages/home.html",
-        }
-
-
-        function route(event) {
-            event = event || window.event
-            event.preventDefault()
-
-            window.history.pushState({}, "", event.target.href)
-
-            handle()
-        }
-
-        function handle() {
-            const { pathname } = window.location
-            let route = routes[pathname] || routes[404]
-            
-            fetch(route)
-            .then(data => data.text())
-            .then(html => {
-                document.querySelector("#app").innerHTML = html
-            })
-        }
-
-        handle()
-
-    </script>
+    <script src="./js/index.js" type="module"></script>
 </body>
 </html>
