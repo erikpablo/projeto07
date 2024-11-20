@@ -1,3 +1,11 @@
+import Router from "./router"
+
+const router = new Router()
+router.add("/", "/pages/home.html")
+router.add("/about", "/pages/about.html")
+router.add("/contact", "/pages/contact.htm")
+router.add(404, "/pages/404.html")
+
 const routes = {
     "/": "/pages/home.html",
     "/about": "/pages/about.html",
@@ -5,30 +13,7 @@ const routes = {
     404: "/pages/404.html",
 }
 
-
-function route(event) {
-    event = event || window.event
-    event.preventDefault()
-
-    window.history.pushState({}, "", event.target.href)
-
-    handle()
-}
-
-function handle() {
-    const { pathname } = window.location
-    let route = routes[pathname] || routes[404]
-    console.log("antes do fetch")
-    fetch(route)
-    .then(data => data.text())
-    .then(html => {
-        document.querySelector("#app").innerHTML = html
-    })
-}
-
 handle()
 
 window.onpopstate = () => handle()
 window.route = () => route()
-
-//
